@@ -5,28 +5,17 @@ import { portfolioData } from '../data/portfolio';
 
 const ProjectCard = ({ project, index }) => {
     const divRef = useRef(null);
-    const [isFocused, setIsFocused] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [opacity, setOpacity] = useState(0);
 
     const handleMouseMove = (e) => {
         if (!divRef.current) return;
 
-        const div = divRef.current;
-        const rect = div.getBoundingClientRect();
+      const div = divRef.current;
+      const rect = div.getBoundingClientRect();
 
-        setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-    };
-
-    const handleFocus = () => {
-        setIsFocused(true);
-        setOpacity(1);
-    };
-
-    const handleBlur = () => {
-        setIsFocused(false);
-        setOpacity(0);
-    };
+      setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
 
     const handleMouseEnter = () => {
         setOpacity(1);
@@ -38,10 +27,8 @@ const ProjectCard = ({ project, index }) => {
 
     return (
         <motion.div
-          ref={divRef}
-          onMouseMove={handleMouseMove}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
+            ref={divRef}
+            onMouseMove={handleMouseMove}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           initial={{ opacity: 0, y: 20 }}
@@ -95,15 +82,15 @@ const ProjectCard = ({ project, index }) => {
                   {project.tech.map((tech) => (
                       <span
                           key={tech}
-                  className="text-xs px-3 py-1 bg-white/5 text-primary-300 rounded-full border border-white/10"
-              >
-                  {tech}
-              </span>
+                          className="text-xs px-3 py-1 bg-white/5 text-primary-300 rounded-full border border-white/10"
+                      >
+                          {tech}
+                      </span>
           ))}
               </div>
           </div>
       </motion.div>
-    );
+  );
 };
 
 const Projects = () => {
@@ -122,9 +109,9 @@ const Projects = () => {
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {portfolioData.projects.map((project, index) => (
-                        <ProjectCard key={project.id} project={project} index={index} />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {portfolioData.projects.map((project, index) => (
+                      <ProjectCard key={project.id} project={project} index={index} />
           ))}
               </div>
           </div>
